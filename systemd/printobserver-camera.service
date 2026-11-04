@@ -1,0 +1,19 @@
+[Unit]
+Description=PrintObserver Camera Service
+After=network.target
+
+[Service]
+Type=simple
+User=printobserver
+Group=printobserver
+SupplementaryGroups=video render
+WorkingDirectory=/home/printobserver/printobserver_camera_service
+Environment=HOME=/home/printobserver
+Environment=PRINTOBSERVER_DATA=/home/printobserver/data
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/usr/bin/python3 -m app.main
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
